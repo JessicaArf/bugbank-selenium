@@ -1,5 +1,8 @@
 ﻿using bugbank_selenium.Drivers;
+using bugbank_selenium.Utils;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,24 +19,29 @@ namespace bugbank_selenium.Pages
             this.driver = driver;
         }
 
-        private IWebElement BtnRegister => driver.FindElement(By.CssSelector("button[type='button']"));
-        private IWebElement InputEmail => driver.FindElement(By.CssSelector("input[type='email']"));
+        private IWebElement BtnRegister => driver.FindElement(By.XPath("//button[text()='Registrar']"));
+        private IWebElement InputEmail => driver.FindElement(By.CssSelector(".card__register input[type='email']"));
         private IWebElement InputName => driver.FindElement(By.CssSelector("input[type='name']"));
-        private IWebElement InputPassword => driver.FindElement(By.CssSelector("input[name='password'"));
+        private IWebElement InputPassword => driver.FindElement(By.CssSelector(".card__register input[name='password'"));
         private IWebElement InputPasswordConfirmation => driver.FindElement(By.CssSelector("input[name='passwordConfirmation'"));
         private IWebElement BtnSlideCreateAccountWithBalance => driver.FindElement(By.Id("toggleAddBalance"));
-        private IWebElement BtnSignUp => driver.FindElement(By.CssSelector("button[type='button']"));
+        private IWebElement BtnSignUp => driver.FindElement(By.XPath("//button[text()='Cadastrar']"));
         private IWebElement BtnBackToLogin => driver.FindElement(By.Id("btnBackButton"));
+        private string appUrl;
 
+
+     
 
         public void AcessForm()
         {
-            driver.Navigate().GoToUrl("https://bugbank.netlify.app/");
+            appUrl = ConfigurationHelper.GetAppUrl();
+            driver.Navigate().GoToUrl(appUrl);
             BtnRegister.Click();
         }
 
         public void CreateAccount(string name, string email, string password, string passwordConfirmation)
         {
+       
             InputEmail.SendKeys(email);
             InputName.SendKeys(name);
             InputPassword.SendKeys(password);
@@ -50,6 +58,14 @@ namespace bugbank_selenium.Pages
             InputPasswordConfirmation.SendKeys(passwordConfirmation);
             BtnSlideCreateAccountWithBalance.Click();
             BtnSignUp.Click();
+        }
+
+        public string GetModalMessage(TimeSpan timeout)
+        {
+            var wait = new WebDriverWait(driver, timeout);
+            var modalTextElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("modalText")));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElement(modalTextElement, "foi criada com sucesso"));
+            return modalTextElement.Text.Trim();
         }
 
 
