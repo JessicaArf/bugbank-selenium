@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("bugbank-selenium")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d0f840862064b5de42f1fb42ebc371eafd1513d9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+69e678b0886fe42a1978c192a8671988a38d4624")]
 [assembly: System.Reflection.AssemblyProductAttribute("bugbank-selenium")]
 [assembly: System.Reflection.AssemblyTitleAttribute("bugbank-selenium")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

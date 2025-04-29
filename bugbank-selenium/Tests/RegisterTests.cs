@@ -32,15 +32,15 @@ namespace bugbank_selenium.Tests
         [Test]
         public void ShouldRegisterSuccessfully()
         {
-            var name = "jessica";
-            var email = "jessica@email.com";
+            var name = "Jessica Souza";
+            var email = "jessicasouza@email.com";
             var password = "senha12345";
             var passwordConfirmation = "senha12345";
             var expectedMessage = "foi criada com sucesso";
 
             registerPage.CreateAccount(name, email, password,passwordConfirmation);
 
-            var message = registerPage.GetModalMessage(TimeSpan.FromSeconds(10));
+            var message = registerPage.GetModalRegisterMessage(TimeSpan.FromSeconds(10));
 
             Assert.That(message, Does.Contain(expectedMessage),"A mensagem de sucesso esperada não foi encontrada no modal.");
         }
@@ -48,15 +48,15 @@ namespace bugbank_selenium.Tests
         [Test]
         public void ShouldRegisterAccountWithBalanceSuccessfully()
         {
-            var name = "teste";
-            var email = "teste@email.com";
-            var password = "senha12345";
-            var passwordConfirmation = "senha12345";
+            var name = "Lucas Santos";
+            var email = "lucassantos@email.com";
+            var password = "senha@1234";
+            var passwordConfirmation = "senha@1234";
             var expectedMessage = "foi criada com sucesso";
 
             registerPage.CreateAccountWithBalance(name, email, password, passwordConfirmation);
 
-            var message = registerPage.GetModalMessage(TimeSpan.FromSeconds(10));
+            var message = registerPage.GetModalRegisterMessage(TimeSpan.FromSeconds(10));
 
             Assert.That(message, Does.Contain(expectedMessage), "A mensagem de sucesso esperada não foi encontrada no modal.");
         }
@@ -83,8 +83,8 @@ namespace bugbank_selenium.Tests
         [Test]
         public void ShouldShowErrorWhenEmailIsInvalid()
         {
-            var name = "jessica";
-            var email = "jessicaemail.com"; 
+            var name = "Joana Silva";
+            var email = "joanasilvaemail.com"; 
             var password = "senha12345";
             var passwordConfirmation = "senha12345";
 
@@ -93,6 +93,22 @@ namespace bugbank_selenium.Tests
             var emailError = registerPage.GetEmailFieldError();
 
             Assert.That(emailError, Is.EqualTo("Formato inválido"), "Erro esperado no campo E-mail não foi exibido.");
+        }
+
+        [Test]
+        public void ShouldShowErrorWhenPasswordsAreDifferent()
+        {
+            var name = "Amanda Santos";
+            var email = "amandasantos@email.com";
+            var password = "senha@1234";
+            var passwordConfirmation = "senha@65432";
+            var expectedMessage = "As senhas não são iguais.";
+
+            registerPage.CreateAccount(name, email, password, passwordConfirmation);
+
+            var message = registerPage.GetModalPasswordMessage(TimeSpan.FromSeconds(10));
+
+            Assert.That(message, Does.Contain(expectedMessage), "A mensagem de erro esperada não foi encontrada no modal.");
         }
 
         [TearDown]

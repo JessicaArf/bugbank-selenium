@@ -24,7 +24,7 @@ namespace bugbank_selenium.Pages
         private IWebElement InputName => driver.FindElement(By.CssSelector("input[type='name']"));
         private IWebElement InputPassword => driver.FindElement(By.CssSelector(".card__register input[name='password'"));
         private IWebElement InputPasswordConfirmation => driver.FindElement(By.CssSelector("input[name='passwordConfirmation'"));
-        private IWebElement BtnSlideCreateAccountWithBalance => driver.FindElement(By.CssSelector(".styles__Container-sc-1pngcbh-0.kIwoPV #toggleAddBalance"));
+        private IWebElement BtnSlideCreateAccountWithBalance => driver.FindElement(By.XPath("//label[@id='toggleAddBalance']"));
         private IWebElement BtnSignUp => driver.FindElement(By.XPath("//button[text()='Cadastrar']"));
         private IWebElement BtnBackToLogin => driver.FindElement(By.Id("btnBackButton"));
         private string appUrl;
@@ -58,7 +58,7 @@ namespace bugbank_selenium.Pages
             BtnSignUp.Click();
         }
 
-        public string GetModalMessage(TimeSpan timeout)
+        public string GetModalRegisterMessage(TimeSpan timeout)
         {
             var wait = new WebDriverWait(driver, timeout);
             var modalTextElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("modalText")));
@@ -84,8 +84,15 @@ namespace bugbank_selenium.Pages
         public string GetPasswordConfirmationFieldError()
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            var error = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(".card__register input[name='password'] + .input__warging")));
+            var error = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(".card__register input[name='passwordConfirmation'] + .input__warging")));
             return error.Text;
+        }
+        public string GetModalPasswordMessage(TimeSpan timeout)
+        {
+            var wait = new WebDriverWait(driver, timeout);
+            var modalTextElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("modalText")));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElement(modalTextElement, "As senhas não são iguais."));
+            return modalTextElement.Text.Trim();
         }
 
         public void ReturnToLogin()
