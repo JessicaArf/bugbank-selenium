@@ -45,6 +45,22 @@ namespace bugbank_selenium.Tests
             Assert.That(message, Does.Contain(expectedMessage),"A mensagem de sucesso esperada não foi encontrada no modal.");
         }
 
+        [Test]
+        public void ShouldRegisterAccountWithBalanceSuccessfully()
+        {
+            var name = "teste";
+            var email = "teste@email.com";
+            var password = "senha12345";
+            var passwordConfirmation = "senha12345";
+            var expectedMessage = "foi criada com sucesso";
+
+            registerPage.CreateAccountWithBalance(name, email, password, passwordConfirmation);
+
+            var message = registerPage.GetModalMessage(TimeSpan.FromSeconds(10));
+
+            Assert.That(message, Does.Contain(expectedMessage), "A mensagem de sucesso esperada não foi encontrada no modal.");
+        }
+
         [TearDown]
         public void TearDown()
         {

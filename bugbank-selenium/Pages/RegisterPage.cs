@@ -24,13 +24,11 @@ namespace bugbank_selenium.Pages
         private IWebElement InputName => driver.FindElement(By.CssSelector("input[type='name']"));
         private IWebElement InputPassword => driver.FindElement(By.CssSelector(".card__register input[name='password'"));
         private IWebElement InputPasswordConfirmation => driver.FindElement(By.CssSelector("input[name='passwordConfirmation'"));
-        private IWebElement BtnSlideCreateAccountWithBalance => driver.FindElement(By.Id("toggleAddBalance"));
+        private IWebElement BtnSlideCreateAccountWithBalance => driver.FindElement(By.CssSelector(".styles__Container-sc-1pngcbh-0.kIwoPV #toggleAddBalance"));
         private IWebElement BtnSignUp => driver.FindElement(By.XPath("//button[text()='Cadastrar']"));
         private IWebElement BtnBackToLogin => driver.FindElement(By.Id("btnBackButton"));
         private string appUrl;
 
-
-     
 
         public void AcessForm()
         {
