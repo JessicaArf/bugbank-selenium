@@ -80,6 +80,20 @@ namespace bugbank_selenium.Tests
             Assert.That(passwordConfirmationError, Is.EqualTo("É campo obrigatório"), "Erro esperado no campo Confirmação de Senha não foi exibido.");      
         }
 
+        [Test]
+        public void ShouldShowErrorWhenEmailIsInvalid()
+        {
+            var name = "jessica";
+            var email = "jessicaemail.com"; 
+            var password = "senha12345";
+            var passwordConfirmation = "senha12345";
+
+            registerPage.CreateAccount(name, email, password, passwordConfirmation);
+
+            var emailError = registerPage.GetEmailFieldError();
+
+            Assert.That(emailError, Is.EqualTo("Formato inválido"), "Erro esperado no campo E-mail não foi exibido.");
+        }
 
         [TearDown]
         public void TearDown()
