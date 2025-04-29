@@ -61,6 +61,26 @@ namespace bugbank_selenium.Tests
             Assert.That(message, Does.Contain(expectedMessage), "A mensagem de sucesso esperada não foi encontrada no modal.");
         }
 
+        [Test]
+        public void ShouldShowErrorsWhenEmailAndPasswordAreEmpty()
+        {
+            var name = "";
+            var email = "";
+            var password = "";
+            var passwordConfirmation = "";
+
+            registerPage.CreateAccount(name, email, password, passwordConfirmation);
+
+            var emailError = registerPage.GetEmailFieldError();
+            var passwordError = registerPage.GetPasswordFieldError();
+            var passwordConfirmationError = registerPage.GetPasswordConfirmationFieldError();
+
+            Assert.That(emailError, Is.EqualTo("É campo obrigatório"), "Erro esperado no campo Nome não foi exibido.");
+            Assert.That(passwordError, Is.EqualTo("É campo obrigatório"), "Erro esperado no campo Senha não foi exibido.");
+            Assert.That(passwordConfirmationError, Is.EqualTo("É campo obrigatório"), "Erro esperado no campo Confirmação de Senha não foi exibido.");      
+        }
+
+
         [TearDown]
         public void TearDown()
         {

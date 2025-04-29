@@ -67,6 +67,27 @@ namespace bugbank_selenium.Pages
         }
 
 
+        public string GetEmailFieldError()
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            var error = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(".card__register input[type='email'] + .input__warging")));
+            return error.Text;
+        }
+
+        public string GetPasswordFieldError()
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            var error = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(".card__register input[name='password'] + .input__warging")));
+            return error.Text;
+        }
+
+        public string GetPasswordConfirmationFieldError()
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            var error = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(".card__register input[name='passwordConfirmation'] + .input__warging")));
+            return error.Text;
+        }
+
         public void ReturnToLogin()
         {
             BtnBackToLogin.Click();
