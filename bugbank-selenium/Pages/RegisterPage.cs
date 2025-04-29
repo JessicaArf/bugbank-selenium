@@ -26,7 +26,7 @@ namespace bugbank_selenium.Pages
         private IWebElement InputPasswordConfirmation => driver.FindElement(By.CssSelector("input[name='passwordConfirmation'"));
         private IWebElement BtnSlideCreateAccountWithBalance => driver.FindElement(By.XPath("//label[@id='toggleAddBalance']"));
         private IWebElement BtnSignUp => driver.FindElement(By.XPath("//button[text()='Cadastrar']"));
-        private IWebElement BtnBackToLogin => driver.FindElement(By.Id("btnBackButton"));
+        private IWebElement BtnBackToLogin => driver.FindElement(By.XPath("//div[@class='styles__ContainerBackButton-sc-7fhc7g-1 jokugX']"));
         private string appUrl;
 
 

@@ -18,7 +18,7 @@ namespace bugbank_selenium.Tests
 
         private IWebDriver driver;
         private RegisterPage registerPage;
-        
+        private LoginPage loginPage;
 
 
         [SetUp]
@@ -26,6 +26,7 @@ namespace bugbank_selenium.Tests
         {
             driver = DriverFactory.CreateChrome();
             registerPage = new RegisterPage(driver);
+            loginPage = new LoginPage(driver);  
             registerPage.AcessForm();
         }
 
@@ -109,6 +110,18 @@ namespace bugbank_selenium.Tests
             var message = registerPage.GetModalPasswordMessage(TimeSpan.FromSeconds(10));
 
             Assert.That(message, Does.Contain(expectedMessage), "A mensagem de erro esperada não foi encontrada no modal.");
+        }
+
+        [Test]
+        public void ShouldReturnToLoginPageFromRegisterPage()
+        {
+            registerPage.AcessForm();
+            registerPage.ReturnToLogin();
+
+            var isLoginVisible = loginPage.IsLoginButtonVisible(TimeSpan.FromSeconds(10));
+
+
+            Assert.That(isLoginVisible, Is.True, "Não retornou para a tela de login.");
         }
 
         [TearDown]
