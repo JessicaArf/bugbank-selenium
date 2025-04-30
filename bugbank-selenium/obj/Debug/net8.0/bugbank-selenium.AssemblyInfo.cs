@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("bugbank-selenium")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c86ec5da4662c39eba40de0da22a1dec8ac74318")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d7496c8e786a9fb8a7ff08bca21a8895c482b31f")]
 [assembly: System.Reflection.AssemblyProductAttribute("bugbank-selenium")]
 [assembly: System.Reflection.AssemblyTitleAttribute("bugbank-selenium")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

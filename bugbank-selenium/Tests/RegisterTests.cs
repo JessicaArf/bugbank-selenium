@@ -30,7 +30,7 @@ namespace bugbank_selenium.Tests
             registerPage.AcessForm();
         }
 
-        [Test]
+        [Test, Category("Register")]
         public void ShouldRegisterSuccessfully()
         {
             var name = "Jessica Souza";
@@ -76,7 +76,7 @@ namespace bugbank_selenium.Tests
             var passwordError = registerPage.GetPasswordFieldError();
             var passwordConfirmationError = registerPage.GetPasswordConfirmationFieldError();
 
-            Assert.That(emailError, Is.EqualTo("É campo obrigatório"), "Erro esperado no campo Nome não foi exibido.");
+            Assert.That(emailError, Is.EqualTo("É campo obrigatório"), "Erro esperado no campo Email não foi exibido.");
             Assert.That(passwordError, Is.EqualTo("É campo obrigatório"), "Erro esperado no campo Senha não foi exibido.");
             Assert.That(passwordConfirmationError, Is.EqualTo("É campo obrigatório"), "Erro esperado no campo Confirmação de Senha não foi exibido.");      
         }
@@ -115,7 +115,6 @@ namespace bugbank_selenium.Tests
         [Test]
         public void ShouldReturnToLoginPageFromRegisterPage()
         {
-            registerPage.AcessForm();
             registerPage.ReturnToLogin();
 
             var isLoginVisible = loginPage.IsLoginButtonVisible(TimeSpan.FromSeconds(10));
